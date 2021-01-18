@@ -5,7 +5,7 @@ import { Redirect, Route } from 'react-router-dom';
 const PublicRoute = ({ component: Component, ...rest }) => {
 	const isAuth = useSelector((state) => {
 		state.auth.user;
-		console.log("isAuth: "+JSON.stringify(state));
+		// console.log("isAuth: "+JSON.stringify(state));
 	});
 	
 	return (

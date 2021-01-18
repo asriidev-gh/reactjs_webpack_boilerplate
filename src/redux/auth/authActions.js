@@ -1,6 +1,5 @@
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { returnErrors } from "./errorActions";
+import { clearErrors, returnErrors } from "./errorActions";
 import { USER_LOADED, 
     USER_LOADING,
     AUTH_ERROR,
@@ -30,7 +29,7 @@ export const loadUser = () => (dispatch,getState) => {
 
 // Register User
 export const register = ({ name,email,password,allowExtraEmails }) => dispatch => {    
-    const history = useHistory();
+    // const history = useHistory();
 
     // Headers
     const config = {
@@ -49,7 +48,8 @@ export const register = ({ name,email,password,allowExtraEmails }) => dispatch =
                     type: REGISTER_SUCCESS,
                     payload: res.data
                 })
-                history.push("/dashboard");
+                dispatch(clearErrors());
+                // history.push("/dashboard");
             }else{
                 dispatch(returnErrors(res.data, res.data.status, "REGISTER_FAIL"));
                 dispatch({

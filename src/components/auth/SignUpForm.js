@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-
+import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -19,6 +19,7 @@ import { register } from "../../redux/auth/authActions";
 import useForm from './useForm';
 import validate from './validateInfo';
 import CustomSnackbar from '../snackbar';
+import SimpleBackdrop from '../backdrop';
 
 function Copyright() {
   return (
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function SignUpForm({submitForm, error, isAuthenticated, register}) {  
-
+  const history = useHistory();
   const classes = useStyles();
 
   const [snackbarProps, setSnackbarProps] = useState({
@@ -76,6 +77,8 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
     date: new Date()
   });  
 
+  const [simpleBackdropProps, setSimpleBackdropProps] = useState({date:new Date(),isOpenFlag:false});
+
   const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useForm(
     submitForm,
     validate,
@@ -83,21 +86,21 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
   );
 
   useEffect(() => {    
-    if(error.id === "REGISTER_FAIL"){                  
+    if(error && error.id === "REGISTER_FAIL"){                  
       handleReset();
       setSnackbarProps({...snackbarProps,open:true,severity:"warning",message:error.msg.msg,date:new Date()});      
-    }
-    else if(error.id === "REGISTER_SUCCESS"){
-      setSnackbarProps({...snackbarProps,open:false,date:new Date()});
-      history.push("/");
-    }
-    else{
-      setSnackbarProps({...snackbarProps,open:false,date:new Date()});
-    }
+    }    
   }, [error]);
 
+  useEffect(() => {
+    if(isAuthenticated){
+      setSimpleBackdropProps({...simpleBackdropProps,date:new Date(),isOpenFlag:true})
+      history.push("/dashboard");
+    }
+  }, [isAuthenticated]);
   return (
     <>
+    <SimpleBackdrop {...simpleBackdropProps}/>
     <Container component="main" maxWidth="xs">
       
       <CssBaseline />
