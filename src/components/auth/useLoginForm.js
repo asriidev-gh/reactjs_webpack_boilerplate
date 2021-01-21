@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const useForm = (callback,validate,register) => {
-  const [values, setValues] = useState({
-    name: '',
+const useSignupForm = (callback,validate,register) => {
+  const [values, setValues] = useState({    
     email: '',
-    password: '',
-    confirmPassword: '',
-    allowExtraEmails: false    
+    password: ''
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,24 +26,18 @@ const useForm = (callback,validate,register) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // console.log("Validate:"+JSON.stringify(validate(values)));
-    let result = validate(values);
-    if(Object.keys(result).length){
-      setErrors(result);
-    }else{
-      setIsSubmitting(true);
-      register(values);      
-    }
+
+    setErrors(validate(values));
     
+    setIsSubmitting(true);
+
+    register(values);
   };
 
   const handleReset = e => {
-    setValues({
-      name: '',
+    setValues({      
       email: '',
-      password: '',
-      confirmPassword: '',
-      allowExtraEmails: false  
+      password: ''      
     });
     setErrors({});
     setIsSubmitting(true);
@@ -54,9 +45,10 @@ const useForm = (callback,validate,register) => {
 
   useEffect(
     () => {
-      if (Object.keys(errors).length === 0 && isSubmitting) {                
+      if (Object.keys(errors).length === 0 && isSubmitting) {
+                
         callback();
-        // console.log("No Form Errors: ");
+        console.log("No Errors: ");
       }
     },
     [errors]
@@ -65,4 +57,4 @@ const useForm = (callback,validate,register) => {
   return { handleChange, handleSubmit, handleReset, values, errors, isSubmitting };
 };
 
-export default useForm;
+export default useSignupForm;

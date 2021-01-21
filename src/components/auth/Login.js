@@ -15,9 +15,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import { register } from "../../redux/auth/authActions";
-import { clearErrors } from "../../redux/auth/errorActions";
-import useSignupForm from './useSignupForm';
+import { login } from "../../redux/auth/authActions";
+import useLoginForm from './useLoginForm';
 import validate from './validateInfo';
 import CustomSnackbar from '../snackbar';
 import SimpleBackdrop from '../backdrop';
@@ -67,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors}) {  
+function LoginForm({submitForm, error, isAuthenticated, register}) {  
   const history = useHistory();
   const classes = useStyles();
 
@@ -80,14 +79,14 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
 
   const [simpleBackdropProps, setSimpleBackdropProps] = useState({date:new Date(),isOpenFlag:false});
 
-  const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useSignupForm(
+  const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useLoginForm(
     submitForm,
     validate,
-    register
+    login
   );
 
   useEffect(() => {    
-    if(error && error.id === "REGISTER_FAIL"){                  
+    if(error && error.id === "LOGIN_FAIL"){                  
       handleReset();
       setSnackbarProps({...snackbarProps,open:true,severity:"warning",message:error.msg.msg,date:new Date()});      
     }    
@@ -95,7 +94,6 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
 
   useEffect(() => {
     if(isAuthenticated){
-      clearErrors();
       setSimpleBackdropProps({...simpleBackdropProps,date:new Date(),isOpenFlag:true})
       history.push("/dashboard");
     }
@@ -118,23 +116,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
         </Typography>
         
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="name"
-                name="name"
-                variant="outlined"
-                required
-                fullWidth
-                id="name"
-                label="Name"
-                autoFocus
-                value={values.name}
-                onChange={handleChange}                                
-              />
-              {errors.name && <p className={classes.errors}>{errors.name}</p>}
-            </Grid>
-            
+          <Grid container spacing={2}>                                      
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -164,27 +146,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
               />
               {errors.password && <p className={classes.errors}>{errors.password}</p>}
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                id="confirmPassword"
-                autoComplete="current-password"
-                value={values.confirmPassword}
-                onChange={handleChange}
-              />
-              {errors.confirmPassword && <p className={classes.errors}>{errors.confirmPassword}</p>}
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox checked={values.allowExtraEmails?true:false} name="allowExtraEmails" onChange={handleChange} color="primary"/>}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
+            
           </Grid>
           <Button
             type="submit"
@@ -193,14 +155,9 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Login
           </Button>
-          <Grid container justify="flex-end" className={classes.signinparag}>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
+          <Grid container justify="flex-end" className={classes.signinparag}>            
             <Box justify="flex-end" className={classes.copyrightsec}>
               <Copyright />
             </Box>
@@ -217,4 +174,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, {register,clearErrors})(SignUpForm);
+export default connect(mapStateToProps, {login})(LoginForm);

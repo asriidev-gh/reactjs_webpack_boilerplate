@@ -1,5 +1,9 @@
-.App {
-  margin: 1rem;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #222222;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  overflow: auto;  
 }

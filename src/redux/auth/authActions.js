@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { clearErrors, returnErrors } from "./errorActions";
+import { returnErrors } from "./errorActions";
 import { USER_LOADED, 
     USER_LOADING,
     AUTH_ERROR,
@@ -48,7 +48,7 @@ export const register = ({ name,email,password,allowExtraEmails }) => dispatch =
                     type: REGISTER_SUCCESS,
                     payload: res.data
                 })
-                dispatch(clearErrors());
+                dispatch(returnErrors(res.data, res.data.status, "REGISTER_SUCCESS"));
                 // history.push("/dashboard");
             }else{
                 dispatch(returnErrors(res.data, res.data.status, "REGISTER_FAIL"));
@@ -84,3 +84,10 @@ export const tokenConfig = (getState) => {
 
     return config;
 }
+
+// Logout User
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCCESS
+    };
+};
