@@ -18,7 +18,7 @@ import Container from '@material-ui/core/Container';
 import { register } from "../../redux/auth/authActions";
 import { clearErrors } from "../../redux/auth/errorActions";
 import useSignupForm from './useSignupForm';
-import validate from './validateInfo';
+import validate from './validateSignupForm';
 import CustomSnackbar from '../snackbar';
 import SimpleBackdrop from '../backdrop';
 
@@ -84,9 +84,9 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
     submitForm,
     validate,
     register
-  );
+  );  
 
-  useEffect(() => {    
+  useEffect(() => {     
     if(error && error.id === "REGISTER_FAIL"){                  
       handleReset();
       setSnackbarProps({...snackbarProps,open:true,severity:"warning",message:error.msg.msg,date:new Date()});      

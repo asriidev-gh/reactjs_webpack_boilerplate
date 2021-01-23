@@ -16,8 +16,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { login } from "../../redux/auth/authActions";
+import { clearErrors } from "../../redux/auth/errorActions";
 import useLoginForm from './useLoginForm';
-import validate from './validateInfo';
+import validateLoginInfo from './validateLoginForm';
 import CustomSnackbar from '../snackbar';
 import SimpleBackdrop from '../backdrop';
 
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function LoginForm({submitForm, error, isAuthenticated, register}) {  
+function LoginForm({submitForm, error, isAuthenticated, login}) {  
   const history = useHistory();
   const classes = useStyles();
 
@@ -81,7 +82,7 @@ function LoginForm({submitForm, error, isAuthenticated, register}) {
 
   const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useLoginForm(
     submitForm,
-    validate,
+    validateLoginInfo,
     login
   );
 
@@ -174,4 +175,5 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, {login})(LoginForm);
+export default connect(mapStateToProps, {login,clearErrors})(LoginForm);
+// export default LoginForm;

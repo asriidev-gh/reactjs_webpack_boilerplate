@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useSignupForm = (callback,validate,register) => {
+const useLoginForm = (callback,validate,login) => {
   const [values, setValues] = useState({    
     email: '',
     password: ''
@@ -16,22 +16,24 @@ const useSignupForm = (callback,validate,register) => {
       [name]: value
     });
 
-    if(name == "allowExtraEmails"){
-      setValues({
-        ...values,
-        [name]: e.target.checked
-      });     
-    }
+    // if(name == "allowExtraEmails"){
+    //   setValues({
+    //     ...values,
+    //     [name]: e.target.checked
+    //   });     
+    // }
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     setErrors(validate(values));
-    
-    setIsSubmitting(true);
 
-    register(values);
+    let errResults = validate(values);
+    if(!Object.keys(errResults).length){
+      setIsSubmitting(true);
+      login(values);
+    }    
   };
 
   const handleReset = e => {
@@ -57,4 +59,4 @@ const useSignupForm = (callback,validate,register) => {
   return { handleChange, handleSubmit, handleReset, values, errors, isSubmitting };
 };
 
-export default useSignupForm;
+export default useLoginForm;

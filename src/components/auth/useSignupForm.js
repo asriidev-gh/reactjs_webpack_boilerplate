@@ -32,9 +32,12 @@ const useSignupForm = (callback,validate,register) => {
 
     setErrors(validate(values));
     
-    setIsSubmitting(true);
-
-    register(values);
+    let errResults = validate(values);
+    if(!Object.keys(errResults).length){
+      // console.log("No err anymore!");
+      setIsSubmitting(true);
+      register(values);
+    }
   };
 
   const handleReset = e => {
@@ -49,16 +52,16 @@ const useSignupForm = (callback,validate,register) => {
     setIsSubmitting(true);
   }
 
-  useEffect(
-    () => {
-      if (Object.keys(errors).length === 0 && isSubmitting) {
+  // useEffect(
+  //   () => {
+  //     if (Object.keys(errors).length === 0 && isSubmitting) {
                 
-        callback();
-        console.log("No Errors: ");
-      }
-    },
-    [errors]
-  );
+  //       callback();
+  //       console.log("No Errors: ");
+  //     }
+  //   },
+  //   [errors]
+  // );
 
   return { handleChange, handleSubmit, handleReset, values, errors, isSubmitting };
 };

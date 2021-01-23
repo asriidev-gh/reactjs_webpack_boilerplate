@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Elibrary from "./pages/Elibrary";
 import Academy from "./pages/Academy";
 import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
 
 const App = ({isAuthenticated}) => {  
   useEffect(()=>{
@@ -45,6 +46,7 @@ const toggle = () => {
         {isAuthenticated ? <Sidebar isOpen={isOpen} toggle={toggle}/> : ""}
         <Switch>            
             <PublicRoute exact path='/' component={Home} />
+            <PublicRoute path='/login' component={Login} />
             {/* <Route path='/signup' component={SignUp} /> */}
             <PrivateRoute                
                 path='/dashboard'
