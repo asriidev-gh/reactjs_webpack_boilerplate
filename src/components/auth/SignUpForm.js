@@ -119,7 +119,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
         
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12}>              
               <TextField
                 autoComplete="name"
                 name="name"
@@ -197,7 +197,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
           </Button>
           <Grid container justify="flex-end" className={classes.signinparag}>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

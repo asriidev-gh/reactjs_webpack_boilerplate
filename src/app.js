@@ -18,8 +18,9 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Elibrary from "./pages/Elibrary";
 import Academy from "./pages/Academy";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
+import SignUp from "./pages/auth/SignUp";
+import Login from "./pages/auth/Login";
+import VerifiedAccountLandingPage from "./pages/VerifiedAccountLandingPage";
 
 const App = ({isAuthenticated}) => {  
   useEffect(()=>{
@@ -47,7 +48,8 @@ const toggle = () => {
         <Switch>            
             <PublicRoute exact path='/' component={Home} />
             <PublicRoute path='/login' component={Login} />
-            {/* <Route path='/signup' component={SignUp} /> */}
+            <PublicRoute path='/verifiedAccount' component={VerifiedAccountLandingPage} />
+            
             <PrivateRoute                
                 path='/dashboard'
                 component={Dashboard}
@@ -60,6 +62,7 @@ const toggle = () => {
                 path='/academy'
                 component={Academy}
               />
+              
             {/* <PublicRoute exact path='/login' component={Login} /> */}
 					  <PublicRoute path='/signup' component={SignUp} />
         </Switch>

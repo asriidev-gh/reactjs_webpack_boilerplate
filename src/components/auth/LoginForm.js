@@ -26,8 +26,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        KAEL
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -113,12 +113,12 @@ function LoginForm({submitForm, error, isAuthenticated, login}) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Login
         </Typography>
         
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>                                      
-            <Grid item xs={12}>
+            <Grid item xs={12}>                
               <TextField
                 variant="outlined"
                 required
