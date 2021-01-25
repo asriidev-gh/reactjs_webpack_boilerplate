@@ -6,7 +6,8 @@ const useSignupForm = (callback,validate,register) => {
     email: '',
     password: '',
     confirmPassword: '',
-    allowExtraEmails: false    
+    allowExtraEmails: false,
+    acceptTermsAndCondition: false      
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,7 +20,7 @@ const useSignupForm = (callback,validate,register) => {
       [name]: value
     });
 
-    if(name == "allowExtraEmails"){
+    if(name == "allowExtraEmails" || name == "acceptTermsAndCondition"){
       setValues({
         ...values,
         [name]: e.target.checked
@@ -31,7 +32,7 @@ const useSignupForm = (callback,validate,register) => {
     e.preventDefault();
 
     setErrors(validate(values));
-    
+
     let errResults = validate(values);
     if(!Object.keys(errResults).length){
       // console.log("No err anymore!");
@@ -46,7 +47,8 @@ const useSignupForm = (callback,validate,register) => {
       email: '',
       password: '',
       confirmPassword: '',
-      allowExtraEmails: false  
+      allowExtraEmails: false,
+      acceptTermsAndCondition: false    
     });
     setErrors({});
     setIsSubmitting(true);

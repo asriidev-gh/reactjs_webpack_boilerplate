@@ -28,6 +28,10 @@ export default function validateSignupInfo(values) {
     } else if (values.confirmPassword !== values.password) {
       errors.confirmPassword = 'Passwords do not match';
     }
+
+    if (!values.acceptTermsAndCondition) {
+      errors.acceptTermsAndCondition = 'Accept Terms & Condition is required';
+    }
     return errors;
   }
 

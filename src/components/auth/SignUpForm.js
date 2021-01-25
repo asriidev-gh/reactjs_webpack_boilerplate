@@ -185,6 +185,15 @@ function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors})
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox checked={values.acceptTermsAndCondition?true:false} name="acceptTermsAndCondition" onChange={handleChange} color="primary"/>}
+                label="I Accept Terms and Conditions *"
+              />
+              
+            </Grid>
+            {errors.acceptTermsAndCondition && <p className={classes.errors}>{errors.acceptTermsAndCondition}</p>}
+                        
           </Grid>
           <Button
             type="submit"

@@ -28,7 +28,7 @@ export const loadUser = () => (dispatch,getState) => {
 }
 
 // Register User
-export const register = ({ name,email,password,allowExtraEmails }) => dispatch => {    
+export const register = ({ name,email,password,allowExtraEmails,acceptTermsAndCondition }) => dispatch => {    
     // const history = useHistory();
 
     // Headers
@@ -39,7 +39,7 @@ export const register = ({ name,email,password,allowExtraEmails }) => dispatch =
     }
 
     // Request Body
-    const body = JSON.stringify({ name, email, password, allowExtraEmails });    
+    const body = JSON.stringify({ name, email, password, allowExtraEmails, acceptTermsAndCondition });    
     
     axios.post(`${process.env.REACT_APP_EBOOKS_API}/user/register`, body, config)
         .then(res => {            
