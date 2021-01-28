@@ -5,7 +5,12 @@ import { USER_LOADED,
          LOGIN_FAIL,
          LOGOUT_SUCCESS,
          REGISTER_SUCCESS,
-         REGISTER_FAIL } from './authTypes';
+         REGISTER_FAIL,
+         FORGOTPASSWORD_SENT,
+         FORGOTPASSWORD_FAIL,
+         RESET_PASSWORD,
+         RESETPASSWORD_SUCCESS,
+         RESETPASSWORD_FAIL} from './authTypes';
 
 const initialState = {
     token: localStorage.getItem('token'),
@@ -39,7 +44,7 @@ export default function (state = initialState, action){
                 isAuthenticated: true,
                 isLoading: false,                
             }
-
+               
         case AUTH_ERROR:
         case LOGIN_FAIL:
         case LOGOUT_SUCCESS:
@@ -53,6 +58,34 @@ export default function (state = initialState, action){
                 isLoading: false
             }
 
+        
+        case RESETPASSWORD_FAIL:
+        case FORGOTPASSWORD_SENT:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                isForgetPassword: true,   
+                isForgetPasswordEmail: action.payload.email,             
+                msg: action.payload.msg,
+                isAuthenticated: false,
+                isLoading: false,                
+            }
+        
+                
+        case RESET_PASSWORD:            
+            localStorage.removeItem('token');
+            return initialState;
+        case RESETPASSWORD_SUCCESS:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                isForgetPassword: false,
+                isForgetPasswordEmail: null,
+                isResetPasswordSuccess: true,
+                msg: null,
+                isAuthenticated: false,
+                isLoading: false,                
+            }
         default:
             return state;
     }

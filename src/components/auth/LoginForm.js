@@ -14,20 +14,23 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { InputAdornment } from '@material-ui/core';
+import { RemoveRedEye } from '@material-ui/icons';
 
-import { login } from "../../redux/auth/authActions";
+import { login, resetPasswordForm } from "../../redux/auth/authActions";
 import { clearErrors } from "../../redux/auth/errorActions";
 import useLoginForm from './useLoginForm';
 import validateLoginInfo from './validateLoginForm';
 import CustomSnackbar from '../snackbar';
 import SimpleBackdrop from '../backdrop';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="/">
-        KAEL
+        {process.env.APP_NAME}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -63,11 +66,14 @@ const useStyles = makeStyles((theme) => ({
   },
   errors: {
     color: 'red'
-  }
+  },
+  eye: {
+    cursor: 'pointer',
+  },
 }));
 
 
-function LoginForm({submitForm, error, isAuthenticated, login}) {  
+function LoginForm({submitForm, error, isAuthenticated, login, clearErrors, resetPasswordForm}) {  
   const history = useHistory();
   const classes = useStyles();
 
@@ -79,6 +85,7 @@ function LoginForm({submitForm, error, isAuthenticated, login}) {
   });  
 
   const [simpleBackdropProps, setSimpleBackdropProps] = useState({date:new Date(),isOpenFlag:false});
+  const [passwordIsMasked, setPasswordIsMasked] = useState(true);
 
   const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useLoginForm(
     submitForm,
@@ -99,6 +106,11 @@ function LoginForm({submitForm, error, isAuthenticated, login}) {
       history.push("/dashboard");
     }
   }, [isAuthenticated]);
+
+  const togglePasswordMask = (e) => {    
+    setPasswordIsMasked(!passwordIsMasked);   
+  };
+
   return (
     <>
     <SimpleBackdrop {...simpleBackdropProps}/>
@@ -138,16 +150,25 @@ function LoginForm({submitForm, error, isAuthenticated, login}) {
                 required
                 fullWidth
                 name="password"
-                label="Password"
-                type="password"
+                label="Password"                
                 id="password"
                 autoComplete="current-password"
                 value={values.password}
                 onChange={handleChange}
+                type={passwordIsMasked ? "password" : "text"}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <RemoveRedEye                        
+                        className={classes.eye}
+                        onClick={togglePasswordMask}
+                      />
+                    </InputAdornment>
+                  ),
+                }}
               />
               {errors.password && <p className={classes.errors}>{errors.password}</p>}
-            </Grid>
-            
+            </Grid>                        
           </Grid>
           <Button
             type="submit"
@@ -158,6 +179,19 @@ function LoginForm({submitForm, error, isAuthenticated, login}) {
           >
             Login
           </Button>
+
+          <Grid container>
+            <Grid item xs>
+              <Link href="/forgotPassword" onClick={()=>resetPasswordForm()} variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
           <Grid container justify="flex-end" className={classes.signinparag}>            
             <Box justify="flex-end" className={classes.copyrightsec}>
               <Copyright />
@@ -175,5 +209,5 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, {login,clearErrors})(LoginForm);
+export default connect(mapStateToProps, {login,clearErrors,resetPasswordForm})(LoginForm);
 // export default LoginForm;

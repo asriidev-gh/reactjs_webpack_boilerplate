@@ -7,7 +7,12 @@ import { USER_LOADED,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL } from './authTypes';
+    REGISTER_FAIL,
+    FORGOTPASSWORD_SENT,
+    FORGOTPASSWORD_FAIL,
+    RESET_PASSWORD,
+    RESETPASSWORD_SUCCESS,
+    RESETPASSWORD_FAIL } from './authTypes';
 
 // check token & load user
 export const loadUser = () => (dispatch,getState) => {
@@ -120,4 +125,78 @@ export const logout = () => {
     return {
         type: LOGOUT_SUCCESS
     };
+};
+
+// Forget Password
+export const forgotPassword = ({ email }) => (dispatch) => {    
+    dispatch({ type:RESET_PASSWORD });
+    // Headers
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'        
+      }
+    };
+  
+    // Request body
+    const body = JSON.stringify({ email });
+  
+    axios
+      .post(`${process.env.REACT_APP_EBOOKS_API}/user/password-reset/get-code`, body, config)
+      .then(res =>{
+        console.log("Forgot Password Data:"+JSON.stringify(res.data));
+        dispatch({
+          type: FORGOTPASSWORD_SENT,
+          payload: res.data
+        })
+    })
+      .catch(err => {
+        dispatch(
+          returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL')
+        );
+        dispatch({
+          type: FORGOTPASSWORD_FAIL
+        });
+        return false;
+      });
+};
+
+// Logout User
+export const resetPasswordForm = () => {
+    return {
+        type: RESET_PASSWORD
+    };
+};
+
+
+export const resetPasswordWithSecretCode = ({ email, secretCode, newPassword, confirmPassword }) => (dispatch) => {      
+  
+  // Headers
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'        
+    }
+  };
+
+  // Request body
+  const body = JSON.stringify({ email, secretCode, newPassword, confirmPassword });
+  console.log("resetPasswordWithSecretCode:"+JSON.stringify(body));
+  axios
+    .post(`${process.env.REACT_APP_EBOOKS_API}/user/password-reset/verify`, body, config)
+    .then(res =>{
+      console.log("Reset Password Data:"+JSON.stringify(res.data));
+      dispatch({
+        type: RESETPASSWORD_SUCCESS,
+        payload: res.data
+      })
+      dispatch({CLEAR_ERRORS});
+  })
+    .catch(err => {
+      dispatch(
+        returnErrors(err.response.data, err.response.status, 'RESETPASSWORD_FAIL')
+      );
+      dispatch({
+        type: RESETPASSWORD_FAIL
+      });
+      return false;
+    });
 };

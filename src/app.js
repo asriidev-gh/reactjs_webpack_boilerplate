@@ -20,6 +20,7 @@ import Elibrary from "./pages/Elibrary";
 import Academy from "./pages/Academy";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/Login";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifiedAccountLandingPage from "./pages/VerifiedAccountLandingPage";
 
 const App = ({isAuthenticated}) => {  
@@ -48,6 +49,7 @@ const toggle = () => {
         <Switch>            
             <PublicRoute exact path='/' component={Home} />
             <PublicRoute path='/login' component={Login} />
+            <PublicRoute path='/forgotPassword' component={ForgotPassword} />
             <PublicRoute path='/verifiedAccount' component={VerifiedAccountLandingPage} />
             
             <PrivateRoute                
