@@ -46,7 +46,7 @@ export const register = ({ name,email,password,allowExtraEmails,acceptTermsAndCo
     // Request Body
     const body = JSON.stringify({ name, email, password, allowExtraEmails, acceptTermsAndCondition });    
     
-    axios.post(`${process.env.REACT_APP_EBOOKS_API}/user/register`, body, config)
+    axios.post(`${process.env.REACT_APP_BACKEND_API}/user/register`, body, config)
         .then(res => {            
             if(res.data.code){                
                 dispatch({
@@ -83,7 +83,7 @@ export const login = ({ email, password }) => (dispatch) => {
     const body = JSON.stringify({ email, password });
   
     axios
-      .post(`${process.env.REACT_APP_EBOOKS_API}/user/login`, body, config)
+      .post(`${process.env.REACT_APP_BACKEND_API}/user/login`, body, config)
       .then(res =>
         dispatch({
           type: LOGIN_SUCCESS,
@@ -99,6 +99,13 @@ export const login = ({ email, password }) => (dispatch) => {
         });
       });
 };
+
+export const loginWithGoogle = ({email,token,name}) => (dispatch) => {
+  dispatch({
+    type: LOGIN_SUCCESS,
+    payload: {email,token,name}
+  })
+}
 
 // Setup config/headers and token
 export const tokenConfig = (getState) => {
@@ -141,7 +148,7 @@ export const forgotPassword = ({ email }) => (dispatch) => {
     const body = JSON.stringify({ email });
   
     axios
-      .post(`${process.env.REACT_APP_EBOOKS_API}/user/password-reset/get-code`, body, config)
+      .post(`${process.env.REACT_APP_BACKEND_API}/user/password-reset/get-code`, body, config)
       .then(res =>{
         console.log("Forgot Password Data:"+JSON.stringify(res.data));
         dispatch({
@@ -181,7 +188,7 @@ export const resetPasswordWithSecretCode = ({ email, secretCode, newPassword, co
   const body = JSON.stringify({ email, secretCode, newPassword, confirmPassword });
   console.log("resetPasswordWithSecretCode:"+JSON.stringify(body));
   axios
-    .post(`${process.env.REACT_APP_EBOOKS_API}/user/password-reset/verify`, body, config)
+    .post(`${process.env.REACT_APP_BACKEND_API}/user/password-reset/verify`, body, config)
     .then(res =>{
       console.log("Reset Password Data:"+JSON.stringify(res.data));
       dispatch({
