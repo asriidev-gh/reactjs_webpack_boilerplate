@@ -1,0 +1,17 @@
+.button{
+    border-radius: 10px;
+    display: flex;
+    margin:30px;
+    padding: 5px;
+    border: none;
+    color: #333333;
+    cursor: pointer;
+}
+
+.icon{
+    width: 30px;    
+}
+
+.buttonText{
+    margin: 5px 0 0 70px;
+}

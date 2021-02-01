@@ -25,6 +25,38 @@
   background-color: #fff;
 }
 
+.google-login-sec {      
+  top:5px;
+  margin: 50px;
+  position: relative;
+  /* background-color: #333333; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-sec-or{
+  justify-content: center;
+}
+
+.login-sec-or {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #dddddd;
+}
+.login-sec-or::before, .login-sec-or::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #dddddd;
+}
+.login-sec-or::before {
+  margin-right: .25em;
+}
+.login-sec-or::after {
+  margin-left: .25em;
+}
+
 .form-img {
   width: 80%;
   height: 80%;

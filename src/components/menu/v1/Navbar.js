@@ -20,11 +20,9 @@ import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MessageIcon from '@material-ui/icons/Message';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 
-import { logout } from "../../../redux/auth/authActions";
-import { clearErrors } from "../../../redux/auth/errorActions";
+import Logout from '../../auth/Logout';
 
 const MainMenuItem = ({children,icon,goToMenu}) => {
     const [activeMainMenu, setActiveMainMenu] = useState('home');
@@ -89,25 +87,7 @@ const NavItem = ({icon, children}) => {
 const DropdownMenu = ({logout,clearErrors}) => {
 
     const [activeMenu, setActiveMenu] = useState('main'); //settings, animals
-    const [menuHeight, setMenuHeight] = useState(null);
-    
-    const handleLogout = () => {
-        console.log("Logout");
-        clearErrors();
-        logout();
-    }
-
-    const LogoutButton = ({children}) => {
-        return (
-            <a href="#" 
-                className="menu-item"
-                onClick={handleLogout}
-            >
-                <span className="icon-button"><ExitToAppIcon/></span>
-                {children}            
-            </a>
-        )
-    }
+    const [menuHeight, setMenuHeight] = useState(null);        
 
     const calcHeight = (el) => {
         const height = el.offsetHeight;
@@ -142,11 +122,8 @@ const DropdownMenu = ({logout,clearErrors}) => {
                         rightIcon={<ChevronRightIcon />}
                         goToMenu="settings">
                         Settings
-                    </DropdownItem>
-                    {/* <DropdownItem 
-                        leftIcon={<ExitToAppIcon/>}                        
-                    >Logout</DropdownItem> */}
-                    <LogoutButton>Logout</LogoutButton>
+                    </DropdownItem>                    
+                    <Logout>Logout</Logout>
                 </div>
             </CSSTransition>
 
@@ -170,7 +147,7 @@ const DropdownMenu = ({logout,clearErrors}) => {
     );
 }
 
-const Navbar = ({toggle,logout,clearErrors}) => {
+const Navbar = ({toggle}) => {    
     return (            
         <NavContainer toggle={toggle}>
             <NavItem icon={<AddIcon />} />
@@ -179,10 +156,10 @@ const Navbar = ({toggle,logout,clearErrors}) => {
             
             <NavItem icon={<ArrowDropDownIcon />}>
                 {/* Drop down goes here */}
-                <DropdownMenu logout={logout} clearErrors={clearErrors}/>
+                <DropdownMenu />
             </NavItem>
         </NavContainer>        
     )
 }
 
-export default connect(null,{logout,clearErrors})(Navbar);
+export default Navbar;

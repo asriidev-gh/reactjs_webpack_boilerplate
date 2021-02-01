@@ -100,10 +100,10 @@ export const login = ({ email, password }) => (dispatch) => {
       });
 };
 
-export const loginWithGoogle = ({email,token,name}) => (dispatch) => {
+export const loginWithGoogle = ({id,email,token,name,authType}) => (dispatch) => {
   dispatch({
     type: LOGIN_SUCCESS,
-    payload: {email,token,name}
+    payload: {token,user:{id,email,name,authType}}
   })
 }
 
