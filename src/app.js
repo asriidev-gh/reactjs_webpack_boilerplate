@@ -16,7 +16,7 @@ import Sidebar from "./components/sidebar";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile";
 import Elibrary from "./pages/Elibrary";
 import Academy from "./pages/Academy";
 import SignUp from "./pages/auth/SignUp";
