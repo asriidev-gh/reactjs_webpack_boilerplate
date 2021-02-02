@@ -1,0 +1,85 @@
+.profileSec {
+    display: flex;
+    margin: 0;
+    padding: 20px;        
+    justify-content: center;
+    overflow: none;        
+}
+
+.profileSecBg {
+    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-bottom: 1px solid #e1e8ed;
+    border-radius: 4px 4px 0 0;
+    height: 105px;
+    width: 100%;
+}
+.profileSecBlock {
+    display: block !important;
+}
+
+.deactivateSec{
+    margin: -85px -10px 0;
+    text-align: right;
+    width: 100%;    
+}
+
+.deactivateSec button{
+    background-color: blue;       
+}
+
+.avatarLink {
+    background-color: #fff;
+    border-radius: 10px;
+    display: inline-block !important;
+    /* float: left; */
+    margin: -80px 5px 0 15px;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+
+.avatarImg {
+    border: 2px solid #fff;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    height: 120px;
+    width: 120px;
+}
+
+.mainContent {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    height: 160px;
+    min-width: 800px; 
+}
+
+.userSec {
+    margin: 0 0 0 150px;
+}
+.userSecName {
+    margin-top:7px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+.userSecName a {
+    color: inherit !important;
+}
+
+.userSecEmail a{
+    color: rgb(136, 135, 135);;
+}
+
+@media screen and (max-width: 768px) {
+    .mainContent {
+        background: #fff none repeat scroll 0 0;
+        border: 1px solid #e1e8ed;
+        border-radius: 6px;
+        height: 160px;
+        min-width: 420px; 
+    }    
+}

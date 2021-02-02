@@ -23,6 +23,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PersonIcon from '@material-ui/icons/Person';
 
 import Logout from '../../auth/Logout';
+import Profile from '../../profile';
 
 const MainMenuItem = ({children,icon,goToMenu}) => {
     const [activeMainMenu, setActiveMainMenu] = useState('home');
@@ -116,13 +117,19 @@ const DropdownMenu = ({logout,clearErrors}) => {
                 unmountOnExit
                 onEnter={calcHeight}>
                 <div className="menu">
-                    <DropdownItem leftIcon={<PersonIcon />}>My-Profile</DropdownItem>
-                    <DropdownItem
+                    <Profile />
+                    {/* <DropdownItem leftIcon={<PersonIcon />}> */}
+                        
+                        {/* <Link to='/profile' className='main-menu-item'>
+                            <Profile />
+                        </Link> */}
+                    {/* </DropdownItem> */}
+                    {/* <DropdownItem
                         leftIcon={<SettingsIcon />}
                         rightIcon={<ChevronRightIcon />}
                         goToMenu="settings">
                         Settings
-                    </DropdownItem>                    
+                    </DropdownItem>                     */}
                     <Logout>Logout</Logout>
                 </div>
             </CSSTransition>

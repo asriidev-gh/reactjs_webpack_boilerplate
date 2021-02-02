@@ -34,7 +34,7 @@ a {
     height: var(--nav-size);
     background-color: var(--bg);
     padding: 0 1rem;
-    border-bottom: var(--border);
+    border-bottom: var(--border);    
   }
   
   /* <ul> */
@@ -43,6 +43,7 @@ a {
     height: 100%;
     display: flex;
     justify-content: flex-end;
+    z-index: 999999; 
   }
   
   /* <li> */
