@@ -5,7 +5,7 @@ import { loadUser } from "./redux/auth/authActions";
 import { hot } from "react-hot-loader";
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 
-import "./App.css";
+import "./app.css";
 
 
 import PrivateRoute from "./utils/PrivateRoute";
