@@ -23,7 +23,8 @@ window.__REDUX_DEVTOOLS_EXTENSION__() : null;
 
 const store = createStore(persistedReducer, initialState, compose(
     applyMiddleware(...middleware),    
-    devTools
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
 
 export default store;
