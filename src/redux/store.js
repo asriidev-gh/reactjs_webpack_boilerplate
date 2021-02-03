@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./rootReducers";
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+import {createLogger} from 'redux-logger';
 
 import { persistReducer } from "redux-persist";
 import storage from  "redux-persist/lib/storage";
@@ -15,16 +17,19 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig,rootReducer);
 
 const initialState = {};
-const middleware = [thunk];
 
-const devTools = process.env.NODE_ENV === 'development' ? 
-window.__REDUX_DEVTOOLS_EXTENSION__ &&
-window.__REDUX_DEVTOOLS_EXTENSION__() : null;
+const logger = createLogger({
+    /* https://github.com/evgenyrodionov/redux-logger */
+    collapsed: true,
+    diff: true
+});
 
-const store = createStore(persistedReducer, initialState, compose(
-    applyMiddleware(...middleware),    
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
-));
+const middleware = [thunk,logger];
+
+const store = createStore(persistedReducer, initialState, 
+    composeWithDevTools(        
+        applyMiddleware(...middleware)  
+    )    
+);
 
 export default store;
