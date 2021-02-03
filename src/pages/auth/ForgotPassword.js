@@ -6,14 +6,14 @@ const ForgotPassword = () => {
   
     return (
         <>
-            <video src="./video/login_video.mp4" id="background-video" autoPlay loop muted />
+            <video src="./assets/video/login_video.mp4" id="background-video" autoPlay loop muted />
 
             <div className='login-form-container'>
                 <div className='login-form-content-left'>
                     <ForgotPasswordForm />
                 </div>
                 <div className='login-form-content-right'>
-                    <img className='form-img' src='images/signup/login.svg' alt='spaceship' />
+                    <img className='form-img' src='./assets/images/signup/login.svg' alt='spaceship' />
                 </div>
             </div>
         </>

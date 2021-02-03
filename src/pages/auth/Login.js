@@ -12,7 +12,7 @@ const Login = () => {
     }
     return (
         <>
-        <video src="./video/login_video.mp4" id="background-video" autoPlay loop muted />
+        <video src="./assets/video/login_video.mp4" id="background-video" autoPlay loop muted />
 
         <div className='login-form-container'>
             {/* <span className='login-close-btn'><Link color="inherit" href="/">×</Link></span> */}
@@ -26,7 +26,7 @@ const Login = () => {
                 <LoginForm submitForm={submitForm}/>
             </div>
             <div className='login-form-content-right'>
-                <img className='form-img' src='images/signup/login.svg' alt='spaceship' />
+                <img className='form-img' src='./assets/images/signup/login.svg' alt='spaceship' />
             </div>
         </div>
         </>

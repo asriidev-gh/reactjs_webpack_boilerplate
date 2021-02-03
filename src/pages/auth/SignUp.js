@@ -11,12 +11,12 @@ const SignUp = () => {
 
   return (
     <>    
-      <video src="./video/kids.mp4" id="background-video" autoPlay loop muted />
+      <video src="./assets/video/kids.mp4" id="background-video" autoPlay loop muted />
                   
       <div className='signup-form-container'>          
           {/* <span className='close-btn'>×</span> */}
           <div className='signup-form-content-left'>
-            <img className='form-img' src='../images/signup/signup.svg' alt='spaceship' />
+            <img className='form-img' src='./assets/images/signup/signup.svg' alt='spaceship' />
           </div>
           <div className='signup-form-content-right'>
             <SignUpForm submitForm={submitForm} />

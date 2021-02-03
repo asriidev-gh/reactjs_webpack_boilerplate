@@ -4,11 +4,12 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
-    "@material-ui/core": "^4.11.2",
+    "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "axios": "^0.21.1",
     "dotenv-webpack": "^6.0.0",
+    "file-loader": "^6.2.0",
     "material-ui-password-field": "^2.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -24,23 +25,24 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/plugin-transform-runtime": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@babel/preset-react": "^7.12.10",
-    "@babel/register": "^7.12.10",
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-transform-runtime": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "@babel/register": "^7.12.13",
     "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "~7.0.0",
     "css-loader": "^5.0.1",
     "react-hot-loader": "^4.13.0",
     "style-loader": "^2.0.0",
-    "webpack": "^4.32.2",
+    "webpack": "^5.1.0",
     "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.5.1"
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
-    "build": "npx webpack --mode development"
+    "build": "npx webpack --mode production"
   },
   "keywords": [],
   "author": "",

@@ -53,7 +53,7 @@ function LoginHooks({loginWithGoogle,isAuthenticated}) {
 
   return (
     <button onClick={signIn} className="button">
-      <img src="/images/signup/google.svg" alt="google login" className="icon"></img>
+      <img src="./assets/images/signup/google.svg" alt="google login" className="icon"></img>
 
       <span className="buttonText">Sign in with Google</span>
     </button>
