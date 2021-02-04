@@ -1,0 +1,9 @@
+.changeLangSelect{
+    border-radius: 10px;
+    border-color: #484a4d;
+    margin:13px;
+    background-color: #484a4d;
+    width: 50px;
+    height: 32px;
+    color: aliceblue;
+}

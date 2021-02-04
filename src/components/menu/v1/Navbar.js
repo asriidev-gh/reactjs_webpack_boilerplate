@@ -24,6 +24,7 @@ import PersonIcon from '@material-ui/icons/Person';
 
 import Logout from '../../auth/Logout';
 import Profile from '../../profile';
+import SelectLanguage from '../../selectlanguage';
 
 const MainMenuItem = ({children,icon,goToMenu}) => {
     const [activeMainMenu, setActiveMainMenu] = useState('home');
@@ -153,7 +154,8 @@ const Navbar = ({toggle}) => {
     }    
     return (            
         <NavContainer toggle={toggle}>
-            <NavItem icon={<AddIcon />} />
+            <SelectLanguage />
+            {/* <NavItem icon={<AddIcon />} /> */}
             <NavItem icon={<NotificationsIcon />} />
             <NavItem icon={<MessageIcon />} />              
 

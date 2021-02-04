@@ -6,8 +6,6 @@ import { hot } from "react-hot-loader";
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 
 import "./app.css";
-
-
 import PrivateRoute from "./utils/PrivateRoute";
 
 import PublicRoute from "./utils/PublicRoute";
@@ -25,29 +23,29 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifiedAccountLandingPage from "./pages/VerifiedAccountLandingPage";
 
 const App = ({isAuthenticated}) => {  
+
   useEffect(()=>{
     loadUser()
     // console.log("states:"+state);
   },[]);
 
-const [isOpen, setIsOpen] = useState(false);
-const toggle = () => {
-    console.log(isOpen);
-    setIsOpen(!isOpen);
-}
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+      console.log(isOpen);
+      setIsOpen(!isOpen);
+  }
 
   return (
     <>      
-      <Router>
-      
+      <Router>        
         {
-          isAuthenticated ? <Navbar toggle={toggle}/> : ""          
+          isAuthenticated ? <><Navbar toggle={toggle}/></> : ""          
           // <Sidebar isOpen={isOpen} toggle={toggle}/>
           
           // <Redirect to='/signup' />
         }
         {isAuthenticated ? <Sidebar isOpen={isOpen} toggle={toggle}/> : ""}
-        <Switch>            
+        <Switch>                       
             <PublicRoute exact path='/' component={Home} />
             <PublicRoute path='/login' component={Login} />
             <PublicRoute path='/forgotPassword' component={ForgotPassword} />
@@ -68,7 +66,7 @@ const toggle = () => {
             <PrivateRoute                
                 path='/profile'
                 component={Profile}
-              />
+              />                         
               
             {/* <PublicRoute exact path='/login' component={Login} /> */}
 					  <PublicRoute path='/signup' component={SignUp} />
