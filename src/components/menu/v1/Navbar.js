@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import { connect } from "react-redux";
 import "./NavbarElements.css";
 import { Link } from "react-router-dom";
@@ -85,9 +85,8 @@ const NavItem = ({icon, children}) => {
     )
 }
 
-const DropdownMenu = ({logout,clearErrors}) => {
-
-    const [activeMenu, setActiveMenu] = useState('main'); //settings, animals
+const DropdownMenu = ({navbarCallback,logout,clearErrors}) => {    
+    const [activeMenu, setActiveMenu] = useState('main');
     const [menuHeight, setMenuHeight] = useState(null);        
 
     const calcHeight = (el) => {
@@ -106,9 +105,14 @@ const DropdownMenu = ({logout,clearErrors}) => {
                 <span className="icon-right">{rightIcon}</span>
             </a>
         );
-    }    
+    }
+    
+    const hideMenu = () => {
+        navbarCallback();
+    };
 
     return (
+        
         <div className="dropdown" style={{ height: menuHeight }}>
             <CSSTransition
                 in={activeMenu === 'main'}
@@ -117,19 +121,7 @@ const DropdownMenu = ({logout,clearErrors}) => {
                 unmountOnExit
                 onEnter={calcHeight}>
                 <div className="menu">
-                    <Profile />
-                    {/* <DropdownItem leftIcon={<PersonIcon />}> */}
-                        
-                        {/* <Link to='/profile' className='main-menu-item'>
-                            <Profile />
-                        </Link> */}
-                    {/* </DropdownItem> */}
-                    {/* <DropdownItem
-                        leftIcon={<SettingsIcon />}
-                        rightIcon={<ChevronRightIcon />}
-                        goToMenu="settings">
-                        Settings
-                    </DropdownItem>                     */}
+                    <Profile callback={hideMenu}/>                    
                     <Logout>Logout</Logout>
                 </div>
             </CSSTransition>
@@ -154,17 +146,26 @@ const DropdownMenu = ({logout,clearErrors}) => {
     );
 }
 
-const Navbar = ({toggle}) => {    
+const Navbar = ({toggle}) => {
+    const [open, setOpen] = useState(false);
+    const navbarCallback = () => {
+       setOpen(!open); 
+    }    
     return (            
         <NavContainer toggle={toggle}>
             <NavItem icon={<AddIcon />} />
             <NavItem icon={<NotificationsIcon />} />
-            <NavItem icon={<MessageIcon />} />
-            
-            <NavItem icon={<ArrowDropDownIcon />}>
-                {/* Drop down goes here */}
-                <DropdownMenu />
-            </NavItem>
+            <NavItem icon={<MessageIcon />} />              
+
+            <li className="nav-item">
+                <a href="#" 
+                className="icon-button"
+                onClick={()=>setOpen(!open)}
+                >
+                    <ArrowDropDownIcon />
+                </a>
+                    {open && <DropdownMenu navbarCallback={navbarCallback}/>}           
+            </li>
         </NavContainer>        
     )
 }

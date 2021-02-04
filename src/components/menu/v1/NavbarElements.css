@@ -81,6 +81,10 @@ a {
   
   
   /* Dropdown Menu */
+
+  .dropdownClose{
+    display: none;
+  }
   
   .dropdown {
     position: absolute;
