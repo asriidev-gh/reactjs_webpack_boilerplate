@@ -23,9 +23,9 @@ const Profile = ({user}) => {
     return (
         <div className="profileSec">            
             <div className="mainContent">
-                <Link to="/" className="profileSecBg profileSecBlock"></Link>                
-                <Link to="/" className="avatarLink">                    
-                    <img src="https://mertskaplan.com/wp-content/plugins/msk-twprofilecard/img/mertskaplan.jpg" className="avatarImg"/>
+                <Link to="#" className="profileSecBg profileSecBlock"></Link>                
+                <Link to="#" className="avatarLink">                    
+                    <img src="../../assets/images/profile/profile.jpg" className="avatarImg"/>
                 </Link>
 
                 <div className="userSec">
@@ -35,10 +35,10 @@ const Profile = ({user}) => {
                         </Button>
                     </div>
                     <div className="userSecName">
-                        <Link to="/">{user.name}</Link>
+                        <Link to="#">{user.name}</Link>
                     </div>
                     <span className="userSecEmail">
-                        <Link to="/">{user.email}</Link>
+                        <Link to="#">{user.email}</Link>
                     </span>
                 </div>
             </div>

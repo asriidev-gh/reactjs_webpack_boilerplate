@@ -19,6 +19,11 @@ import Elibrary from "./pages/Elibrary";
 import Academy from "./pages/Academy";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/Login";
+import Quizzes from "./pages/Quizzes";
+
+import QuizDetails from "./components/quiz/QuizDetails";
+import Quiz from "./components/quiz/Quiz";
+
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import VerifiedAccountLandingPage from "./pages/VerifiedAccountLandingPage";
 
@@ -39,34 +44,23 @@ const App = ({isAuthenticated}) => {
     <>      
       <Router>        
         {
-          isAuthenticated ? <><Navbar toggle={toggle}/></> : ""          
-          // <Sidebar isOpen={isOpen} toggle={toggle}/>
-          
-          // <Redirect to='/signup' />
+          isAuthenticated ? <><Navbar toggle={toggle}/></> : ""
         }
         {isAuthenticated ? <Sidebar isOpen={isOpen} toggle={toggle}/> : ""}
         <Switch>                       
             <PublicRoute exact path='/' component={Home} />
             <PublicRoute path='/login' component={Login} />
+            
             <PublicRoute path='/forgotPassword' component={ForgotPassword} />
             <PublicRoute path='/verifiedAccount' component={VerifiedAccountLandingPage} />
             
-            <PrivateRoute                
-                path='/dashboard'
-                component={Dashboard}
-              />
-            <PrivateRoute                
-                path='/elibrary'
-                component={Elibrary}
-              />
-            <PrivateRoute                
-                path='/academy'
-                component={Academy}
-              />
-            <PrivateRoute                
-                path='/profile'
-                component={Profile}
-              />                         
+            <PrivateRoute path='/quizzes' component={Quizzes} />
+            <PrivateRoute path='/quizdetails/:id' component={QuizDetails} />
+            <PrivateRoute path='/quiz/:id' component={Quiz} />
+            <PrivateRoute path='/dashboard' component={Dashboard} />
+            <PrivateRoute path='/createQuiz' component={Quizzes} />
+            <PrivateRoute path='/academy' component={Academy} />
+            <PrivateRoute path='/profile'component={Profile} />                         
               
             {/* <PublicRoute exact path='/login' component={Login} /> */}
 					  <PublicRoute path='/signup' component={SignUp} />

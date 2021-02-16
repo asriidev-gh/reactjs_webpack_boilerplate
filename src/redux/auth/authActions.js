@@ -53,7 +53,8 @@ export const register = ({ name,email,password,allowExtraEmails,acceptTermsAndCo
                     type: REGISTER_SUCCESS,
                     payload: res.data
                 })
-                dispatch(returnErrors(res.data, res.data.status, "REGISTER_SUCCESS"));
+                dispatch({CLEAR_ERRORS});
+                // dispatch(returnErrors(res.data, res.data.status, "REGISTER_SUCCESS"));
                 // history.push("/dashboard");
             }else{
                 dispatch(returnErrors(res.data, res.data.status, "REGISTER_FAIL"));

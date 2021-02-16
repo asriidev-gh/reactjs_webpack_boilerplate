@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 
 import { CSSTransition } from 'react-transition-group';
 
-import HomeIcon from '@material-ui/icons/Home';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SchoolIcon from '@material-ui/icons/School';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
@@ -14,13 +13,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import OfflineBoltIcon from '@material-ui/icons/OfflineBolt';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import SettingsIcon from '@material-ui/icons/Settings';
-import AddIcon from '@material-ui/icons/Add';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MessageIcon from '@material-ui/icons/Message';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PersonIcon from '@material-ui/icons/Person';
 
 import Logout from '../../auth/Logout';
 import Profile from '../../profile';
@@ -45,22 +40,22 @@ const NavContainer = ({toggle,children}) => {
     return (
         <>                    
             <nav className="navbar">
-                <Link to='/' className='navbar-logo'>
-                    <LocalLibraryIcon/><strong>K.A.E.L</strong>
+                <Link to='/quizzes' className='navbar-logo'>
+                    <LocalLibraryIcon/><strong>ManpowerGroup</strong>
                 </Link>
                 <div className='main-menu'>
                     <div className='menu-bar' onClick={toggle}>
                         <MenuIcon style={{ color: 'white' }}/>
                     </div>
-                    <Link to='/dashboard' className='main-menu-item'>                        
-                        <DashboardIcon/><i className='menu-label'>Dashboard</i>                        
+                    <Link to='/quizzes' className='main-menu-item'>                        
+                        <DashboardIcon/><i className='menu-label'>Quizzes</i>                        
                     </Link>
-                    <Link to='/elibrary' className='main-menu-item'>
-                        <LibraryBooksIcon/><i className='menu-label'>E-Library</i>
+                    <Link to='/createQuiz' className='main-menu-item'>
+                        <LibraryBooksIcon/><i className='menu-label'>Create Quiz</i>
                     </Link>
-                    <Link to='/academy' className='main-menu-item'>
+                    {/* <Link to='/academy' className='main-menu-item'>
                         <SchoolIcon/><i className='menu-label'>Academy</i>
-                    </Link>
+                    </Link> */}
                 </div>
                 <ul className="navbar-nav">{children}</ul>
             </nav>
