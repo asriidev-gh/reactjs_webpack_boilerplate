@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-
+import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -16,9 +16,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import { register } from "../../redux/auth/authActions";
-import useForm from './useForm';
-import validate from './validateInfo';
+import { clearErrors } from "../../redux/auth/errorActions";
+import useSignupForm from './useSignupForm';
+import validate from './validateSignupForm';
 import CustomSnackbar from '../snackbar';
+import SimpleBackdrop from '../backdrop';
 
 function Copyright() {
   return (
@@ -65,8 +67,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function SignUpForm({submitForm, error, isAuthenticated, register}) {  
-
+function SignUpForm({submitForm, error, isAuthenticated, register, clearErrors}) {  
+  const history = useHistory();
   const classes = useStyles();
 
   const [snackbarProps, setSnackbarProps] = useState({
@@ -76,28 +78,31 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
     date: new Date()
   });  
 
-  const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useForm(
+  const [simpleBackdropProps, setSimpleBackdropProps] = useState({date:new Date(),isOpenFlag:false});
+
+  const { handleChange, handleSubmit, handleReset, values, errors, isSubmitting } = useSignupForm(
     submitForm,
     validate,
     register
-  );
+  );  
 
-  useEffect(() => {    
-    if(error.id === "REGISTER_FAIL"){                  
+  useEffect(() => {     
+    if(error && error.id === "REGISTER_FAIL"){                  
       handleReset();
       setSnackbarProps({...snackbarProps,open:true,severity:"warning",message:error.msg.msg,date:new Date()});      
-    }
-    else if(error.id === "REGISTER_SUCCESS"){
-      setSnackbarProps({...snackbarProps,open:false,date:new Date()});
-      history.push("/");
-    }
-    else{
-      setSnackbarProps({...snackbarProps,open:false,date:new Date()});
-    }
+    }    
   }, [error]);
 
+  useEffect(() => {
+    if(isAuthenticated){
+      clearErrors();
+      setSimpleBackdropProps({...simpleBackdropProps,date:new Date(),isOpenFlag:true})
+      history.push("/dashboard");
+    }
+  }, [isAuthenticated]);
   return (
     <>
+    <SimpleBackdrop {...simpleBackdropProps}/>
     <Container component="main" maxWidth="xs">
       
       <CssBaseline />
@@ -114,7 +119,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
         
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12}>              
               <TextField
                 autoComplete="name"
                 name="name"
@@ -180,6 +185,15 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox checked={values.acceptTermsAndCondition?true:false} name="acceptTermsAndCondition" onChange={handleChange} color="primary"/>}
+                label="I Accept Terms and Conditions *"
+              />
+              
+            </Grid>
+            {errors.acceptTermsAndCondition && <p className={classes.errors}>{errors.acceptTermsAndCondition}</p>}
+                        
           </Grid>
           <Button
             type="submit"
@@ -192,7 +206,7 @@ function SignUpForm({submitForm, error, isAuthenticated, register}) {
           </Button>
           <Grid container justify="flex-end" className={classes.signinparag}>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
@@ -212,4 +226,4 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, {register})(SignUpForm);
+export default connect(mapStateToProps, {register,clearErrors})(SignUpForm);

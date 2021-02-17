@@ -1,1 +1,5 @@
 node_modules
+# .env
+dist
+local-webpack.config.js
+public/index.html

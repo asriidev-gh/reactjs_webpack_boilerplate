@@ -1,0 +1,212 @@
+.questions, .quizResultPage{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ffffff;    
+    width: 80%;
+    margin: auto;
+    padding: 10px;    
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+}
+
+.lifeline-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.lifeline {
+    position: relative;
+    top: -3px;
+}
+
+.h3{
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    text-align: center;    
+}
+
+.options-container{
+    display: inline-block;
+    width: 50%;
+}
+
+.option {
+    background-color: #dddddd;
+    border-radius: 10px;
+    columns: #333333;
+    cursor: pointer;
+    margin: 10px;
+    padding: 20px;    
+    text-align: center;
+    width: 90%;
+    opacity: 0.7;
+    /* transition: 0.3s; */
+}
+
+.option:hover{
+    background-color: darken(blue,20%);
+    border-color: #333333;
+    opacity: 1
+}
+
+.currentAnswerActive {
+    background-color: green;
+    color: #EBF4FF;
+}
+
+.option:focus {
+    background-color:white;
+}
+
+.button-container{
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+}
+
+.button-container button{
+    border:none;
+    color: #ffff;
+    cursor:pointer;
+    margin:right;
+    padding: 10px;
+}
+
+.button-container button:first-child{
+    background-color: rgb(130, 130, 138);
+    box-shadow: 5px 10px;
+    transition: 0.2s linear all;    
+}
+
+.button-container button:n-child(2){
+    background-color: green;
+    box-shadow: 5px 10px;
+}
+
+.button-container button:first-child:hover{
+    background-color: darken(blue,20%);
+}
+
+.button-container button:last-child{
+    background-color: red;
+    box-shadow: 5px 10px;
+    transition: 0.2s linear all;
+}
+
+.button-container button:last-child:hover{
+    background-color: darken(red,10%);
+}
+
+.quizSec{
+    display: flex;
+    margin: 20px;    
+}
+
+.quizPointsSec{
+    flex: 1;
+    text-align: left;
+    margin:20px;
+    margin:20px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.quizTimerSec{
+    flex: 2;
+    text-align: center;
+    /* margin:20px;
+    margin:20px; */
+    font-weight: bold;
+    font-size: 24px;    
+    flex-grow: 1;
+}
+
+.quizCounterSec{
+    flex: 3;    
+    text-align: right; 
+    margin:20px;
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.quizQuestionSec{
+    flex: 1 100%;
+    margin:20px;
+}
+
+.quizDifficultySec{
+    flex: 1;
+    text-align: left;
+    margin:20px;
+}
+
+.quizSubmitBtn{
+    flex: 2;
+    text-align: right;
+    margin:20px;
+}
+
+.messageSec{
+    flex: 1 100%;
+    text-align: center;
+    margin:20px;
+}
+
+.quizResultSec{
+    flex: 1;
+    margin:20px; 
+    text-align: center;   
+}
+.quizScoreSec{
+    flex: 2;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.finalPageBtn {
+    margin:"10px";
+}
+
+.quizResultimg{
+    margin-left: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.quizzesSec{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    justify-content:center;
+    padding:50px;
+    margin:20px;
+}
+
+.quizzesSec{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-align: center;
+}
+
+.searchInputSec{
+    /* display: flex;
+    flex-wrap: wrap; */
+    /* flex: 1 100%;
+    align-items: center;
+    margin:20px; */
+    /* margin-left:200px; */
+    align-items: center;
+    background-color: blue;
+    text-align: center;
+}
+
+.quizzesListSec{
+    flex: 1 100%;
+    text-align: center;
+    margin:20px;
+}

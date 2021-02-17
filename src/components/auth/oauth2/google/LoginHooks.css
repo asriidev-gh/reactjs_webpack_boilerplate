@@ -1,0 +1,24 @@
+.button{
+    border-radius: 10px;
+    display: flex;
+    margin:30px;
+    padding: 5px;
+    border: none;
+    color: #333333;
+    cursor: pointer;
+    background-color: #4285f4;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+}
+
+.icon{
+    width: 30px;
+    border-radius: 10px;
+    background-color: #ffffff;    
+}
+
+.buttonText{
+    margin: 5px 0 0 70px;
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+}

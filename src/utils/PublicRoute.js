@@ -5,14 +5,14 @@ import { Redirect, Route } from 'react-router-dom';
 const PublicRoute = ({ component: Component, ...rest }) => {
 	const isAuth = useSelector((state) => {
 		state.auth.user;
-		console.log("isAuth: "+JSON.stringify(state));
+		console.log("isAuth: "+JSON.stringify(state.auth.user));
 	});
 	
 	return (
 		<Route
 			{...rest}
 			render={(props) =>
-				isAuth ? <Redirect to='/home' /> : <Component {...props} />
+				isAuth ? <Redirect to='/login' /> : <Component {...props} />
 			}
 		/>
 	);

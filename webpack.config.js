@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const Dotenv = require('dotenv-webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -15,8 +16,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
+        use: ["style-loader", "css-loader"],      
+      }
     ],
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
@@ -32,5 +33,13 @@ module.exports = {
     hotOnly: true,
     historyApiFallback: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin(),new Dotenv()],
+  plugins: [
+    new CopyWebpackPlugin({
+        patterns: [
+          {from:'public/'} 
+        ]
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+    new Dotenv()        
+  ],
 };
