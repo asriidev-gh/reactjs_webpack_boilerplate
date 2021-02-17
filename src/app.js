@@ -43,10 +43,12 @@ const App = ({isAuthenticated}) => {
   return (
     <>      
       <Router>        
-        {
+        <Navbar toggle={toggle}/>
+        <Sidebar isOpen={isOpen} toggle={toggle}/>
+        {/* {
           isAuthenticated ? <><Navbar toggle={toggle}/></> : ""
-        }
-        {isAuthenticated ? <Sidebar isOpen={isOpen} toggle={toggle}/> : ""}
+        } */}
+        {/* {isAuthenticated ? <Sidebar isOpen={isOpen} toggle={toggle}/> : ""} */}
         <Switch>                       
             <PublicRoute exact path='/' component={Home} />
             <PublicRoute path='/login' component={Login} />

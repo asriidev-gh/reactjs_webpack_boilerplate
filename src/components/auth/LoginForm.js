@@ -101,7 +101,7 @@ function LoginForm({submitForm, error, isAuthenticated, login, clearErrors, rese
   useEffect(() => {
     if(isAuthenticated){
       setSimpleBackdropProps({...simpleBackdropProps,date:new Date(),isOpenFlag:true})
-      history.push("/dashboard");
+      history.push("/quizzes");
     }
   }, [isAuthenticated]);
 

@@ -20,6 +20,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import Logout from '../../auth/Logout';
 import Profile from '../../profile';
 import SelectLanguage from '../../selectlanguage';
+import { useSelector } from "react-redux";
+import { Button } from '@material-ui/core';
 
 const MainMenuItem = ({children,icon,goToMenu}) => {
     const [activeMainMenu, setActiveMainMenu] = useState('home');
@@ -37,11 +39,12 @@ const MainMenuItem = ({children,icon,goToMenu}) => {
 
 
 const NavContainer = ({toggle,children}) => {
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     return (
         <>                    
             <nav className="navbar">
                 <Link to='/quizzes' className='navbar-logo'>
-                    <LocalLibraryIcon/><strong>ManpowerGroup</strong>
+                    <LocalLibraryIcon/><strong>MPG</strong>
                 </Link>
                 <div className='main-menu'>
                     <div className='menu-bar' onClick={toggle}>
@@ -57,7 +60,16 @@ const NavContainer = ({toggle,children}) => {
                         <SchoolIcon/><i className='menu-label'>Academy</i>
                     </Link> */}
                 </div>
+                { isAuthenticated ?
                 <ul className="navbar-nav">{children}</ul>
+                :
+                <> 
+                    <Link to='/login'>
+                        <Button variant="outlined" style={{color:"#ffffff"}}>Login</Button>
+                    </Link>
+                    {/* <Button variant="outlined" style={{color:"#ffffff"}}>Sign-Up</Button> */}
+                </>
+                }
             </nav>
         </>
     )

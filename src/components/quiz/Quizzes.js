@@ -14,6 +14,7 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
+import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     iconButton: {
       padding: 10,
     },
+    loader: {
+        display: 'flex',
+        alignItems: 'center',      
+    }
   }));
 
 const Quizzes = () => {
@@ -93,8 +98,10 @@ const Quizzes = () => {
                             </div>;                
                     })}            
                 </div>
-            </InfiniteScroll>            
-            {isLoading && <ClipLoader loading={isLoading} size={35} />}
+            </InfiniteScroll>
+            <Grid container justify = "center">
+                {isLoading && <ClipLoader loading={isLoading} size={35} />}
+            </Grid>
         </div>
         </>
     )
