@@ -36,9 +36,9 @@ function LoginHooks({loginWithGoogle,isAuthenticated}) {
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
-    alert(
-      `Failed to login. 😢 Please try again with correct credentials`
-    );
+    // alert(
+    //   `Failed to login. 😢 Please try again with correct credentials`
+    // );
   };
 
   const { signIn } = useGoogleLogin({
