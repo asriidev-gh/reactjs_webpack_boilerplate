@@ -40,6 +40,15 @@ module.exports = {
         ]
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new Dotenv()        
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      VERSION: JSON.stringify('1.0'),
+      BROWSER_SUPPORTS_HTML5: true,            
+      'process.env.NODE_ENV': 'production',
+      'process.env.REACT_APP_BACKEND_API': process.env.REACT_APP_BACKEND_API,      
+      'process.env.GOOGLE_CLIENT_ID': process.env.GOOGLE_CLIENT_ID,      
+      'process.env.APP_NAME': process.env.APP_NAME,      
+    })           
   ],
 };
