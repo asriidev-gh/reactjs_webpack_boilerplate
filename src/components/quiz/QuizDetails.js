@@ -46,7 +46,7 @@ const QuizDetails = (props) => {
         const { id } = props.match.params;
         if(!isEmpty(quizzes)){
             const quiz = quizzes && quizzes.find((quiz) => quiz._id === id);
-            console.log("QuizDetails: "+JSON.stringify(quiz));
+            // console.log("QuizDetails: "+JSON.stringify(quiz));
             setQuizDetails(quiz);
         }else{
             history.push("/quizzes");
