@@ -43,8 +43,7 @@ const Question = ({quiz,timeLeft,enableSubmitBtn,currentAnswer,onConfirmAnswer,o
             <Box className={classes.quizName}>
                 <h1>{quiz.quizName}</h1>
             </Box>
-            <Paper className={classes.paper}>
-                
+            <Paper className={classes.paper}>                
                 <div className="questions">
                     <div className="quizPointsSec">
                         <span>Points: ({quiz.currentQuestion.points})</span>
@@ -62,12 +61,12 @@ const Question = ({quiz,timeLeft,enableSubmitBtn,currentAnswer,onConfirmAnswer,o
                     </div>
 
                     <div className="options-container">
-                        <div className={currentAnswer === quiz.currentQuestion.optionA ? "option currentAnswerActive": "option"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionA}</div>
-                        <div className={currentAnswer === quiz.currentQuestion.optionB ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionB}</div>
+                        <div option="optionA" className={currentAnswer === "optionA" ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionA}</div>
+                        <div option="optionB" className={currentAnswer === "optionB" ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionB}</div>
                     </div>
                     <div className="options-container">
-                        <div className={currentAnswer === quiz.currentQuestion.optionC ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionC}</div>
-                        <div className={currentAnswer === quiz.currentQuestion.optionD ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionD}</div>
+                        <div option="optionC" className={currentAnswer === "optionC" ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionC}</div>
+                        <div option="optionD" className={currentAnswer === "optionD" ? "option currentAnswerActive": "option ${currentAnswer}"} onClick={onChooseAnswerHandler}>{quiz.currentQuestion.optionD}</div>
                     </div>
 
                     <div className="quizDifficultySec">

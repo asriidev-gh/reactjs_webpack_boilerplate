@@ -11,7 +11,10 @@ export default function(state = initialState, action){
             // console.log("QuizReducer is called!");
             return { ...state,isLoading:true }   
         case QUIZZES_LOADED:
-            return { ...state,isLoading:false,quizzes:action.payload }             
+            if(action.payload){
+                return { ...state,isLoading:false,quizzes:action.payload }
+            }
+            return { ...state,isLoading:false };
         default:
             return state;
     }

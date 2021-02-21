@@ -52,7 +52,7 @@ const QuizResult = ({quiz,quizPassed,quizResult,retakeQuiz,userQuizzes}) => {
                     className={classes.resultBtns}>
                     Retake
                 </Button>
-                <Link to={"/quizzes/"}>
+                <Link to={"/quizzes"}>
                     <Button 
                         // onClick={showUserAnswer}
                         variant="contained" color="primary" className={classes.resultBtns} disableElevation>

@@ -22,6 +22,8 @@ const Quiz = (props) => {
 
     const token = useSelector(state => state.auth.token); 
 
+    const quizzes = useSelector(state => state.quizzes.quizzes);
+
     const [quiz,setQuiz] = useState({
         questions: [],
         currentQuestion: {},
@@ -52,15 +54,14 @@ const Quiz = (props) => {
     const [quizPassed,setQuizPassed] = useState(false);
     const [userQuizzes,setUserQuizzes] = useState([]);
 
-    const displayQuestions = (currentQuestionIndex) => {
-            // console.log("displayQuestions:"+JSON.stringify(quiz.questions));
+    const displayQuestions = (currentQuestionIndex) => {            
             if(!isEmpty(quiz.questions)){
+                
                 const questions = quiz.questions;
                 let numberOfQuestions = questions.length;
                 let currentQuestion = questions[currentQuestionIndex];                
                 let nextQuestion = questions[currentQuestionIndex + 1];
-                let previousQuestion = questions[currentQuestionIndex -1];                    
-
+                let previousQuestion = questions[currentQuestionIndex -1];                                    
                 let totalPoints = questions.reduce(function(sum, item){
                     return sum = sum+item.points;
                 },0);
@@ -124,37 +125,27 @@ const Quiz = (props) => {
     }
 
     useEffect(() => {        
-        // const id = "601e7c0744aaef2f5468361f";
-        const config = {
-            headers: {
-                'Content-Type':'application/json',
-                'auth-token':token
-            }
-        }        
-        const body = JSON.stringify({ id });    
+        const quiz = quizzes.find((quiz) => quiz._id === id);
         
-        axios.post(`${process.env.REACT_APP_BACKEND_API}/quiz/getQuiz`, body, config)
-        .then(res => {            
-            if(res.data.code){                                        
-               setQuiz({
-                   ...quiz,
-                   quizName:res.data.quiz.quizName,
-                   questions:res.data.quiz.questions,
-                   quizId:id
-               });                           
-            }                      
-        })
-        .catch(err => {
-            console.log("Error with Getting Quiz data!"+err);            
-        });        
+        if(!isEmpty(quiz)){
+            setQuiz({
+                ...quiz,
+                quizName:quiz.quizName,
+                questions:quiz.questions,
+                quizId:id
+            });
+        }                       
     }, []);
 
-    useEffect(() => {        
-        displayQuestions(quiz.currentQuestionIndex);
+    useEffect(() => {         
+        if(quiz.questions && !isEmpty(quiz.questions)){            
+            displayQuestions(0);
+        }                
     }, [quiz.questions]);
     
-    const onChooseAnswerHandler = (e) => {                
-        setCurrentAnswer(e.target.innerHTML);                               
+    const onChooseAnswerHandler = (e) => {
+        // console.log("User Answer:"+e.currentTarget.attributes.option.value);               
+        setCurrentAnswer(e.currentTarget.attributes.option.value);                               
         setEnableSubmitBtn(true);        
     }
 
@@ -243,14 +234,14 @@ const Quiz = (props) => {
             <Helmet>Quiz Page</Helmet>
             {/* <Timer initialMinute="30" initialSeconds="30" />             */}
             
-            {!finished ? 
+            {!finished && !isEmpty(quiz.currentQuestion) ? 
                 <Question quiz={quiz} 
                           currentAnswer={currentAnswer}
                           timeLeft={timeLeft}
                           enableSubmitBtn={enableSubmitBtn}
                           onConfirmAnswer={onConfirmAnswer}
                           onChooseAnswerHandler={onChooseAnswerHandler}
-                />                
+                />                             
             :   
                 <QuizResult 
                     quiz={quiz} 
@@ -258,7 +249,7 @@ const Quiz = (props) => {
                     quizPassed={quizPassed} 
                     retakeQuiz={retakeQuiz}
                     userQuizzes={userQuizzes}
-                />                
+                />                 
             }
         </div>
     )

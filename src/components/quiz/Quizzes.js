@@ -1,6 +1,4 @@
 import React,{useEffect,useState} from 'react';
-import { useSelector } from "react-redux";
-import axios from "axios";
 import useFetchQuiz from './useFetchQuiz';
 import useDebounce from './useDebounce';
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -14,7 +12,6 @@ import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
-import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,7 +67,7 @@ const Quizzes = () => {
     return (
         <>
         <div className={classes.root}>     
-            <Grid container justify="center" className={classes.quizzesHolder}>
+            <Grid container justify="center" className={classes.quizzesHolder}>                
                 <Paper className={classes.searchSec}>                    
                     <InputBase
                         className={classes.input}
