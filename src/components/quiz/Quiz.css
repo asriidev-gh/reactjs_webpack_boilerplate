@@ -10,6 +10,10 @@
     text-align: center;
 }
 
+.questionHeader{
+    display: flex;
+}
+
 .lifeline-container{
     display: flex;
     justify-content: space-between;
@@ -42,6 +46,8 @@
     text-align: center;
     width: 90%;
     opacity: 0.7;
+    flex-grow: 1;
+    word-wrap: break-word;
     /* transition: 0.3s; */
 }
 
@@ -209,4 +215,17 @@
     flex: 1 100%;
     text-align: center;
     margin:20px;
+}
+
+@media screen and (max-width: 768px) {
+    .quizCounterSec, .quizTimerSec, .quizPointsSec, .options-container, .quizSubmitBtn, .quizDifficultySec{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .quizCounterSec, .quizTimerSec, .quizDifficultySec, .quizSubmitBtn, .option{
+        flex: 1;
+    }
 }
